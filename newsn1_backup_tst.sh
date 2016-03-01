@@ -10,7 +10,7 @@ STATUS=$?
 #Архив с файломи сайта
 FILE1='/backup/files'
 #Дамп базы
-FILE2='/src/simplicator/dumper/backup/'$(ls -t --full-time /src/simplicator/dumper/backup/ | grep .sql.gz | awk '{if (NR < 2)printf("%s ",$9);}')
+FILE2='/src/simpltst/dumper/backup/'$(ls -t --full-time /src/simpltst/dumper/backup/ | grep .sql.gz | awk '{if (NR < 2)printf("%s ",$9);}')
 #Директория с архивами бэкапов тест сайта
 FILE3='/backup/files_test'
 #Путь до примонтированиого каталога FTP для файлов сайта
