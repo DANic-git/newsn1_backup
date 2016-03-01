@@ -40,13 +40,13 @@ function main
 		exit
 	fi
 
-	log "Архивировани каталогов тестового сайта"
-	cd /src/
-	tar cfz $FILE3/$(date +"%Y%m%d.%H%M%S").tar.gz ./simpltst --exclude='img/knews' --exclude='samples' --exclude='log' --exclude='dumper' | adddate
-	if [[ $? != 0 ]]; then
-		log "Ошибка при копировании каталогов"	
-		exit
-	fi
+	# log "Архивировани каталогов тестового сайта"
+	# cd /src/
+	# tar cfz $FILE3/$(date +"%Y%m%d.%H%M%S").tar.gz ./simpltst --exclude='img/knews' --exclude='samples' --exclude='log' --exclude='dumper' | adddate
+	# if [[ $? != 0 ]]; then
+		# log "Ошибка при копировании каталогов"	
+		# exit
+	# fi
   
 	log "Копирование на удаленный сервер"
   rsync -va -T '/tmp/' --no-perms --no-owner --no-group $FILE1/ $FTPDIRFILE/ | adddate
@@ -55,19 +55,19 @@ function main
 		exit
 	fi		
   
-  log "Копирование на удаленный сервер"
-  rsync -va -T '/tmp/' --no-perms --no-owner --no-group $FILE3/ $FTPDIRFILETST/ | adddate
-	if [[ $? != 0 ]]; then
-		log "Ошибка при копировании на удаленный сервер"
-		exit
-	fi	
+  # log "Копирование на удаленный сервер"
+  # rsync -va -T '/tmp/' --no-perms --no-owner --no-group $FILE3/ $FTPDIRFILETST/ | adddate
+	# if [[ $? != 0 ]]; then
+		# log "Ошибка при копировании на удаленный сервер"
+		# exit
+	# fi	
   
-	log "Копирование SQL на удаленный сервер"
-  rsync -v -T '/tmp/' --no-perms --no-owner --no-group $FILE2/ $FTPDIRSQL/ | adddate
-	if [[ $? != 0 ]]; then
-		log "Ошибка при копировании на удаленный сервер"
-		exit
-	fi
+	# log "Копирование SQL на удаленный сервер"
+  # rsync -v -T '/tmp/' --no-perms --no-owner --no-group $FILE2/ $FTPDIRSQL/ | adddate
+	# if [[ $? != 0 ]]; then
+		# log "Ошибка при копировании на удаленный сервер"
+		# exit
+	# fi
   
 	log "Удаляем все бэкапы кроме последнего" $FILE1
 	cd $FILE1
@@ -77,13 +77,13 @@ function main
 	fi
   	rm -f `ls -t --full-time | awk '{if (NR > 2)printf("%s ",$9);}'`
 
- 	log "Удаляем все бэкапы кроме последнего" $FILE3
-	cd $FILE3
-	if [[ $? != 0 ]]; then
-		log "Нет каталога " $FILE3
-		exit
-	fi
-  	rm -f `ls -t --full-time | awk '{if (NR > 2)printf("%s ",$9);}'`
+ 	# log "Удаляем все бэкапы кроме последнего" $FILE3
+	# cd $FILE3
+	# if [[ $? != 0 ]]; then
+		# log "Нет каталога " $FILE3
+		# exit
+	# fi
+  	# rm -f `ls -t --full-time | awk '{if (NR > 2)printf("%s ",$9);}'`
     
     
 	log "Удаляем все бэкапы кроме последних 2 из каталога " $FTPDIRFILE
@@ -94,21 +94,21 @@ function main
 	fi
   	rm -f `ls -t --full-time | awk '{if (NR > 3)printf("%s ",$9);}'` 
 
-  log "Удаляем все бэкапы кроме последних 2 из каталога " $FTPDIRFILETST
-	cd $FTPDIRFILETST
-	if [[ $? != 0 ]]; then
-		log "Нет каталога " $FTPDIRFILETST
-		exit
-	fi
-  	rm -f `ls -t --full-time | awk '{if (NR > 3)printf("%s ",$9);}'` 
+  # log "Удаляем все бэкапы кроме последних 2 из каталога " $FTPDIRFILETST
+	# cd $FTPDIRFILETST
+	# if [[ $? != 0 ]]; then
+		# log "Нет каталога " $FTPDIRFILETST
+		# exit
+	# fi
+  	# rm -f `ls -t --full-time | awk '{if (NR > 3)printf("%s ",$9);}'` 
 
-	log "Удаляем все бэкапы кроме последних 2 из каталога " $FTPDIRSQL
-	cd $FTPDIRSQL
-	if [[ $? != 0 ]]; then
-		log "Нет каталога " $FTPDIRSQL 
-		exit
-	fi
-  	rm -f `ls -t --full-time | awk '{if (NR > 3)printf("%s ",$9);}'`
+	# log "Удаляем все бэкапы кроме последних 2 из каталога " $FTPDIRSQL
+	# cd $FTPDIRSQL
+	# if [[ $? != 0 ]]; then
+		# log "Нет каталога " $FTPDIRSQL 
+		# exit
+	# fi
+  	# rm -f `ls -t --full-time | awk '{if (NR > 3)printf("%s ",$9);}'`
     
 log "Успешное окончание Бэкапа"
 }
